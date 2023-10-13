@@ -13,5 +13,10 @@
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@firebase/app": "^0.9.20",
+		"@firebase/storage": "^0.11.2",
+		"firebase": "^10.5.0"
+	}
 }

@@ -6,6 +6,7 @@
 import { storage } from "@src/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { makeID } from '@lib/utils'
+import imageStore from '@stores/imageStore'
 
 // Capture a frame from the video stream
 export function captureFrame(videoElement) {
@@ -35,10 +36,19 @@ export function uploadFile(imgFile) {
     'contentType': 'image/jpeg',
   };
   uploadBytes(imgRef, imgFile, metadata)
-    .then((snapshot) => {
-      //Do the next thing
+    .then( (snapshot) => {
+      console.log(snapshot)
+      saveImageUrl(snapshot.ref)
     })
     .catch((error) => {
       console.log(error)
     });
 };
+
+async function saveImageUrl(imgRef) {
+  const url = await getDownloadURL(imgRef)
+  imageStore.update( store => {
+    store.url = url
+    return store
+  })
+}

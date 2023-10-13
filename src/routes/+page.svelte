@@ -5,6 +5,7 @@
 <script>
   import { onMount } from "svelte"
   import Video from "./Video.svelte"
+  import Image from "./Image.svelte";
   import { captureFrame } from "@lib/imageUpload"
 
 
@@ -21,3 +22,4 @@
 </script>
 
 <Video/>
+<Image/>

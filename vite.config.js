@@ -8,7 +8,8 @@ export default defineConfig({
 		alias: {
 			// these are the aliases and paths to them
 			'@lib': path.resolve('./src/lib'), //@lib might be build in for sveltekit now
-			'@src': path.resolve('./src')
+			'@src': path.resolve('./src'),
+			'@stores': path.resolve('./src/stores'),
 		},
 	},
 });

@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
 
 const imageStoreTemplate = {
-  url: '/',
+  inputUrl: '/',
+  outputUrl: '/',
 }
 
 const imageStore = writable(imageStoreTemplate);

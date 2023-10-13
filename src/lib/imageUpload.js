@@ -6,6 +6,7 @@
 import { storage } from "@src/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { makeID } from '@lib/utils'
+import { sendToAPI } from "./stableDiffusion";
 import imageStore from '@stores/imageStore'
 
 // Capture a frame from the video stream
@@ -48,7 +49,11 @@ export function uploadFile(imgFile) {
 async function saveImageUrl(imgRef) {
   const url = await getDownloadURL(imgRef)
   imageStore.update( store => {
-    store.url = url
+    store.inputUrl = url
     return store
   })
+  sendToAPI(
+    'Turn into a sleek product design and remove the background',
+    'people, clutter, backgroung',
+    url)
 }

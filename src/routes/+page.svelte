@@ -3,22 +3,37 @@
 </svelte:head>
 
 <script>
-  import { onMount } from "svelte"
-  import Image from "./Image.svelte";
+  /**
+   * TODO:
+   * Error handling
+  */
+
   import { captureFrame } from "@lib/imageUpload"
-  import Input from '@components/Input.svelte'
+
+  import Output from "./Output.svelte";
+  import Input from './Input.svelte'
+  import WideButton from "@components/WideButton.svelte";
 
   let inputCanvas //Binded to the export from input
-
-  onMount(()=>{
-    // Event listener to spacebar
-    document.addEventListener("keydown", event => {
-      if (event.code === 'Space') {
-        captureFrame(inputCanvas)
-      }
-    });
-  })
 </script>
 
-<Input bind:canvas={inputCanvas} />
-<Image/>
+<section class="image-generation">
+  <div class="images">
+    <Input bind:canvas={inputCanvas} />
+    <Output/>
+  </div>
+  <WideButton on:click={ ()=> captureFrame(inputCanvas) }>Generate Image</WideButton>
+</section>
+
+<style>
+  .image-generation {
+    max-width: 1300px;
+    margin: auto;
+  }
+  .images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2em;
+  }
+</style>

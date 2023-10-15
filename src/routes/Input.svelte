@@ -4,7 +4,7 @@
    * 
   */
   import { onMount } from "svelte"
-  import IconButton from "./IconButton.svelte"
+  import IconButton from "@components/IconButton.svelte"
 
   export let canvas 
   let onVideo
@@ -31,7 +31,7 @@
   })
 
   const setImage = (e) => {
-    if (onVideo) { stopVideo(video) }
+    if (onVideo) { stopVideo() }
 
     const file = e.target.files[0];
     const img = new Image();
@@ -41,13 +41,13 @@
     img.src = URL.createObjectURL(file);
   }
 
-  function startVideo(videoElement) {
+  function startVideo() {
     // Access the user's webcam stream
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(function(stream) {
         // Create a video element to display the webcam stream
-        videoElement.srcObject = stream;
-        videoElement.autoplay = true;
+        video.srcObject = stream;
+        video.autoplay = true;
       })
       .catch(function(err) {
         console.error('Error accessing webcam:', err);
@@ -55,11 +55,11 @@
     onVideo = true
   }
 
-  function stopVideo(videoElement) {
+  function stopVideo() {
     onVideo = false
-    videoElement.pause()
-    videoElement.src = "";
-    videoElement.srcObject.getTracks()[0].stop()
+    video.pause()
+    video.src = "";
+    video.srcObject.getTracks()[0].stop()
   }
 
   function drawFrame() {
@@ -70,6 +70,9 @@
   }
 
   function fitToCanvas(source, sourceWidth, sourceHeight) {
+    //Empty canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
     //Fit image to canvas
     //Something not right with this function but needs to be solved wehn causing problems
     const aspectRatio = sourceWidth / sourceHeight;
@@ -98,7 +101,7 @@
 
 <div class="input">
   <div class="button-floater">
-    <IconButton on:click={ () => startVideo(video) }>Video</IconButton>
+    <IconButton on:click={ () => startVideo() }>Video</IconButton>
     <IconButton file on:change={ setImage }>Image</IconButton>
   </div>
   <canvas id="input_canvas"></canvas>

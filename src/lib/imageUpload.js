@@ -6,7 +6,7 @@
 import { storage } from "@src/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { makeID } from '@lib/utils'
-import { sendToAPI } from "./stableDiffusion";
+import { sendToAPI } from "./stablediffusionapi";
 import imageStore from '@stores/imageStore'
 
 // Capture a frame from the video stream

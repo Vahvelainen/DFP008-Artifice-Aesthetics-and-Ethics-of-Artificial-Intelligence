@@ -8,13 +8,14 @@
    * Error handling
   */
 
-  import { captureFrame } from "@lib/imageUpload"
+  import { captureFrame } from "@lib/stablediffusionapi"
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'
-  import WideButton from "@components/WideButton.svelte";
+  import WideButton from "@components/WideButton.svelte"
 
   let inputCanvas //Binded to the export from input
+
 </script>
 
 <section class="image-generation">
@@ -22,7 +23,7 @@
     <Input bind:canvas={inputCanvas} />
     <Output/>
   </div>
-  <WideButton on:click={ ()=> captureFrame(inputCanvas) }>Generate Image</WideButton>
+  <WideButton on:click={ () => captureFrame(inputCanvas) }>Generate Image</WideButton>
 </section>
 
 <style>

@@ -1,8 +1,33 @@
 import imageStore from '@stores/imageStore'
+import imageUpload from "@lib/imageUpload"
+
+/**
+ * Saves content of canvas element to firebase storage
+ * and send following url as reguest for stablediffusionapi.com img2img endpoint
+ * Also sets urls from both firebase and API response to imagestore
+ * @param {HTMLCanvasElement} canvas 
+ */
+export function captureFrame(canvas) {
+  canvas.toBlob(blob => {
+    console.log(blob);
+    imageUpload(blob, saveInputUrlAndSendToAPI)
+  }, 'image/jpeg');
+}
+
+function saveInputUrlAndSendToAPI(url) {
+  imageStore.update( store => {
+    store.inputUrl = url
+    return store
+  })
+  sendToAPI(
+    'Turn into a sleek product design and remove the background',
+    'people, clutter, backgroung',
+    url)
+}
 
 // Send request to the stable diffusion img2img API
 // https://stablediffusionapi.com/docs/stable-diffusion-api/img2img
-export function sendToAPI(promt, negative_promt, imageUrl) {
+function sendToAPI(promt, negative_promt, imageUrl) {
   fetch('https://stablediffusionapi.com/api/v3/img2img', {
     method: 'POST',
     headers: {
@@ -32,6 +57,7 @@ export function sendToAPI(promt, negative_promt, imageUrl) {
     result = JSON.parse(result)
     console.log(result)
     const url = result.output[0]
+    //Set url
     imageStore.update( store => {
       store.outputUrl = url
       return store

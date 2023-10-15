@@ -10,15 +10,8 @@ import { sendToAPI } from "./stableDiffusion";
 import imageStore from '@stores/imageStore'
 
 // Capture a frame from the video stream
-export function captureFrame(videoElement) {
+export function captureFrame(canvas) {
   console.log('Sending image to cloud')
-  //Creates a cnavas to be turned into blob
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext('2d');
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-  context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  
   // Convert the captured frame to base64 format
   canvas.toBlob(blob => {
       // Use the blob as needed (e.g. upload it to a server)

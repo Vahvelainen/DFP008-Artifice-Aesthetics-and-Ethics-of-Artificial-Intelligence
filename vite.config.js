@@ -10,6 +10,7 @@ export default defineConfig({
 			'@lib': path.resolve('./src/lib'), //@lib might be build in for sveltekit now
 			'@src': path.resolve('./src'),
 			'@stores': path.resolve('./src/stores'),
+			'@components': path.resolve('./src/lib/components'),
 		},
 	},
 });

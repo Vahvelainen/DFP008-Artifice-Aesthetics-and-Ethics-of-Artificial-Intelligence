@@ -4,22 +4,21 @@
 
 <script>
   import { onMount } from "svelte"
-  import Video from "./Video.svelte"
   import Image from "./Image.svelte";
   import { captureFrame } from "@lib/imageUpload"
+  import Input from '@components/Input.svelte'
 
+  let inputCanvas //Binded to the export from input
 
   onMount(()=>{
     // Event listener to spacebar
     document.addEventListener("keydown", event => {
       if (event.code === 'Space') {
-        // Video module adds video elemet with id webCamStream
-        const videoElement = document.querySelector("#webCamStream")
-        captureFrame(videoElement)
+        captureFrame(inputCanvas)
       }
     });
   })
 </script>
 
-<Video/>
+<Input bind:canvas={inputCanvas} />
 <Image/>

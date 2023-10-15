@@ -21,7 +21,7 @@ export function sendToAPI(promt, negative_promt, imageUrl) {
       safety_checker: 'no',	//A checker for NSFW images. If such an image is detected, it will be replaced by a blank image.
       enhance_prompt: 'no',	//Enhance prompts for better results; default: yes, options: yes/no
       guidance_scale: 7.5,	//Scale for classifier-free guidance (minimum: 1; maximum: 20)
-      strength: 0.7,	//Prompt strength when using init image. 1.0 corresponds to full destruction of information in the init image.
+      strength: 0.5,	//Prompt strength when using init image. 1.0 corresponds to full destruction of information in the init image.
       seed: null,	//Seed is used to reproduce results, same seed will give you same image in return again. Pass null for a random number.
       webhook: null,	//Set an URL to get a POST API call once the image generation is complete.
       track_id: null,	//This ID is returned in the response to the webhook API call. This will be used to identify the webhook request.

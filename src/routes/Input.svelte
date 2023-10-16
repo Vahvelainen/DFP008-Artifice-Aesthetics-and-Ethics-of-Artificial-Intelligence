@@ -23,9 +23,9 @@
 
     drawFrame()
     video.addEventListener('loadeddata', () => {
-      
       // Because the image from camera is mirrored, need to flip horizontally.
-      ctx.translate(video.videoWidth, 0);
+      // Now mirrors every time video is opened whichs is accetable bc its gives choice
+      ctx.translate(canvas.width, 0);
       ctx.scale(-1, 1);
       video.play();
     });

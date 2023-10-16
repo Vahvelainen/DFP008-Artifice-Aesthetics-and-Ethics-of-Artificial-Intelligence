@@ -16,9 +16,10 @@
     canvas = document.getElementById('input_canvas')
     ctx = canvas.getContext('2d');
 
-    //Resolution that will be sent to dtable diffusion
-    canvas.width = 640;
-    canvas.height = 480;
+    //Resolution that will be sent to stable diffusion
+    //1024x1024, 1152x896, 1216x832, 1344x768, 1536x640, 640x1536, 768x1344, 832x1216, or 896x1152
+    canvas.width = 1024;
+    canvas.height = 1024;
 
     drawFrame()
     video.addEventListener('loadeddata', () => {

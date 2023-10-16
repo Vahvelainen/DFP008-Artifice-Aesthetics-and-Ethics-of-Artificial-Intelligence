@@ -8,7 +8,8 @@
    * Error handling
   */
 
-  import { captureFrame } from "@lib/stablediffusionapi"
+  //import { captureFrame } from "@lib/stablediffusionapi"
+  import { captureFrame } from "@lib/stabilityai"
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'

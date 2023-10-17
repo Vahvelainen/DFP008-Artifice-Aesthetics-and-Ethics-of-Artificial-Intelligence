@@ -28,7 +28,7 @@ export function captureFrame(canvas) {
 }
 
 function sendToAPI(promt, negative_promt, image) {
-  const engineId = 'stable-diffusion-xl-1024-v1-0'
+  const engineId = 'stable-diffusion-512-v2-1' //This engine is faster but guidance scale ssems to differ
   const apiHost = 'https://api.stability.ai'
 
   const prompts = [
@@ -41,7 +41,7 @@ function sendToAPI(promt, negative_promt, image) {
     Authorization: `Bearer ${apiKey}`
   }
   const body = {
-    image_strength: 0.35,
+    image_strength: 0.7,
     init_image_mode: "IMAGE_STRENGTH",
     init_image: image,
     //text_prompts: prompts, //set separetely

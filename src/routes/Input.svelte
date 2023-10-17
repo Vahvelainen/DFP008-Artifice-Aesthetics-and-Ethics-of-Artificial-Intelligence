@@ -17,9 +17,16 @@
     ctx = canvas.getContext('2d');
 
     //Resolution that will be sent to stable diffusion
+
+    //stable-diffusion-xl-1024-v1-0
     //1024x1024, 1152x896, 1216x832, 1344x768, 1536x640, 640x1536, 768x1344, 832x1216, or 896x1152
-    canvas.width = 1024;
-    canvas.height = 1024;
+
+    //stable-diffusion-512-v2-1
+    //Needs to be multibles of 64
+    //512x512
+    //512x640
+    canvas.width = 640;
+    canvas.height = 512;
 
     drawFrame()
     video.addEventListener('loadeddata', () => {
@@ -110,7 +117,15 @@
 
 <style>
   .input {
+    /* Same as output, could be made to a svelte class */
     position: relative;
+    max-width: 640px;
+    width: 100%;
+    aspect-ratio: 640/512;
+    border-radius: 10px;
+    border: 2px solid #00DEC6;
+    overflow: hidden;
+    margin-bottom: 1em;
   }
   .button-floater{
     position: absolute;
@@ -119,9 +134,6 @@
     display: flex;
   }
   canvas{
-    width: 640px;
-    height: 480px;
-    border: 2px solid #00DEC6;
-    border-radius: 10px;
+    width: 100%;
   }
 </style>

@@ -15,7 +15,7 @@
     <img class="input" src={$imageStore.inputUrl} alt="Last upload">
   {:else}
     <!-- Placeholder -->
-    <div class="input" style="aspect-ratio: 640 / 480 ;"></div>
+    <div class="input"></div>
   {/if}
 
   {#if $imageStore.outputUrl} 
@@ -26,19 +26,26 @@
       <p>Generate something</p>
     </div>
   {/if}
-
 </div>
 
 <style>
   .output {
+    /* Same as output, could be made to a svelte class */
     position: relative;
-  }
-  .generated{
-    width: 640px;
-    height: 480px;
-    object-fit: contain;
+    max-width: 640px;
+    width: 100%;
+    aspect-ratio: 640/512;
     border-radius: 10px;
     border: 2px solid #00DEC6;
+    overflow: hidden;
+    margin-bottom: 1em;
+  }
+  div.input{
+    aspect-ratio: 640/512;
+  }
+  .generated{
+    width: 100%;
+    object-fit: contain;
   }
   .input{
     position: absolute;

@@ -31,11 +31,14 @@ export async function loadHistoryToStore(){
 /** Push a file to end of the history */
 export function addToHistory(inputUrl, outpuUrl, description = ''){
   historyStore.update( history => {
-    history.generations.push({
-      input: inputUrl,
-      output: outpuUrl,
-      description: description,
-    })
+    history.generations = [
+      {
+        input: inputUrl,
+        output: outpuUrl,
+        description: description,
+      },
+      ...history.generations,
+    ]
     return history
   })
 }

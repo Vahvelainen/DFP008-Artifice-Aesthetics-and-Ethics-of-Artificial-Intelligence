@@ -13,12 +13,11 @@
   export let inputDescription //will be used to bind so the value can be setted back
 
   let history = []
-  let currentIndex = 0
+  let currentIndex = -1
 
   onMount( async ()=>{
     await loadHistoryToStore()
     history = $historyStore.generations
-    currentIndex = history.length
     console.log('History ready')
   })
 
@@ -42,9 +41,9 @@
 </script>
 
 <div>
-  <IconButton secondary on:click={ () => setImage(currentIndex - 1) }>Back</IconButton>
-  <IconButton secondary on:click={ () => setImage(currentIndex + 1) }>Forward</IconButton>
-  <IconButton secondary on:click={ () => setImage(history.length - 1) }>Latest</IconButton>
+  <IconButton secondary on:click={ () => setImage(currentIndex + 1) }>Back</IconButton>
+  <IconButton secondary on:click={ () => setImage(currentIndex - 1) }>Forward</IconButton>
+  <IconButton secondary on:click={ () => setImage(0) }>Latest</IconButton>
 </div>
 
 <style>

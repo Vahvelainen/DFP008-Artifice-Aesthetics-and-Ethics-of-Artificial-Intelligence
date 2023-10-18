@@ -6,12 +6,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCHcXf0zPZacC3Z_YduSxih45H_x0auoGI",
-  authDomain: "collabgen.firebaseapp.com",
-  projectId: "collabgen",
-  storageBucket: "collabgen.appspot.com",
-  messagingSenderId: "737455051668",
-  appId: "1:737455051668:web:639bf7905a1e34a83ff581"
+  apiKey: "AIzaSyAqIwk--TPI0pUk2JD1dMAZHkCdEbjeQAs",
+  authDomain: "aicocreate.firebaseapp.com",
+  projectId: "aicocreate",
+  storageBucket: "aicocreate.appspot.com",
+  messagingSenderId: "201830829829",
+  appId: "1:201830829829:web:efbd3f03d1fc1079b7316c"
 };
 
 // Initialize Firebase

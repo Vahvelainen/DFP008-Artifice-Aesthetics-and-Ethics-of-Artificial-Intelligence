@@ -1,6 +1,6 @@
 
 import { db } from "@src/firebase"
-import { collection, addDoc, Timestamp } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, Timestamp, query, orderBy, limit } from "firebase/firestore"; 
 
 export async function saveGeneration(inputUrl, outputUrl, promt, negative_promt, description = '') {
 
@@ -18,4 +18,20 @@ export async function saveGeneration(inputUrl, outputUrl, promt, negative_promt,
 
   console.log("Generation data saved with ID: ", docRef.id);
 
-  }
+}
+
+export async function getHistory() {
+  const ref = collection(db, "generations")
+  const q = query(ref, orderBy("created", "asc"), limit(10));
+
+  let generations = []
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    // console.log(doc.id, " => ", doc.data());
+    generations.push(doc.data())
+  });
+
+  return generations
+}

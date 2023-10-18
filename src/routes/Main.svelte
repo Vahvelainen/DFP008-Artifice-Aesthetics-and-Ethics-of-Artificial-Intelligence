@@ -8,6 +8,7 @@
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'
+  import History from "./History.svelte";
   import WideButton from "@components/WideButton.svelte"
   import Textarea from "@components/Textarea.svelte";
 
@@ -43,6 +44,7 @@
 
   <div class="output">
     <Output/>
+    <History bind:inputDescription />
     <!-- Image history in the future -->
   </div>
 

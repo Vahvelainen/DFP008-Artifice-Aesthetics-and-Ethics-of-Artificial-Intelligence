@@ -4,8 +4,7 @@
    * Error handling
   */
 
-  import imageUpload from '@lib/imageUpload'
-  import { sendToAPI, saveInputUrl } from "@lib/stabilityai"
+  import genrateImage from "@lib/imageGeneration"
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'
@@ -19,8 +18,8 @@
   export function captureFrame(canvas) {
     canvas.toBlob(blob => {
       console.log(blob);
-      imageUpload(blob, saveInputUrl)
-      sendToAPI(
+      //Upload input to firebase and set it to a store
+      genrateImage(
         //Promt
         'Turn the object in the picture into a sleek product design' +
         inputDescription +
@@ -28,7 +27,7 @@
         ', realism, rendering, futurism, --q2',
         //Negative promt
         'people, clutter, background (drawing) (painting)',
-        blob)
+        blob, inputDescription) //Input description is saved separately to database
     }, 'image/jpeg');
   }
 

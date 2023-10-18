@@ -9,11 +9,12 @@ import { makeID } from '@lib/utils'
 
 /**
  * Upload image to firebase storage
- * Takes optional Callback function with url of saved file as a parameter
+ * Returns promise of image url
  * @param {Blob} imgFile 
  * @param {Function} callBack 
+ * @returns {Promise<string>}
  */
-export default function imageUpload(imgFile, callBack = ()=>{}) {
+export default async function imageUpload(imgFile) {
   // Create a reference to random ID
   const imageId = makeID() 
   const fileName = imageId + '.jpeg';
@@ -21,10 +22,12 @@ export default function imageUpload(imgFile, callBack = ()=>{}) {
   const metadata = {
     'contentType': 'image/jpeg',
   };
-  uploadBytes(imgRef, imgFile, metadata)
-    .then( (snapshot) => getDownloadURL(snapshot.ref) )
-    .then( url => callBack(url) )
-    .catch((error) => {
-      console.log(error)
-    });
+
+  try {
+    const snapshot = await uploadBytes(imgRef, imgFile, metadata)
+    const imgUrl = await getDownloadURL(snapshot.ref)
+    return imgUrl
+  } catch (error) {
+    console.log(error)
+  }
 };

@@ -48,52 +48,12 @@ export function sendToAPI(promt, negative_promt, image) {
     formData.append(`text_prompts[${i}][weight]`, promt.weight )
   }
   
-  fetch(`${apiHost}/v1/generation/${engineId}/image-to-image`, {
+  const promise = fetch(`${apiHost}/v1/generation/${engineId}/image-to-image`, {
     method: 'POST',
     headers: headers,
     body: formData,
   })
-  .then(response => response.text())
-  .then(response => {
-    response = JSON.parse(response)
-    console.log(response)
-    const image = b64toBlob(response.artifacts[0].base64)
-    imageUpload(image, saveOutputUrl)
-  })
-  .catch(error => console.log('error', error));
+
+  return promise
 }
 
-export function saveInputUrl(url) {
-  imageStore.update( store => {
-    store.inputUrl = url
-    return store
-  })
-}
-
-function saveOutputUrl(url) {
-  imageStore.update( store => {
-    store.outputUrl = url
-    return store
-  })
-}
-
-//Will be needed
-function b64toBlob(b64Data, contentType='', sliceSize=512) {
-  const byteCharacters = atob(b64Data);
-  const byteArrays = [];
-
-  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    const byteNumbers = new Array(slice.length);
-    for (let i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    const byteArray = new Uint8Array(byteNumbers);
-    byteArrays.push(byteArray);
-  }
-
-  const blob = new Blob(byteArrays, {type: contentType});
-  return blob;
-}

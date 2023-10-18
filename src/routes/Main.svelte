@@ -13,7 +13,7 @@
   import Textarea from "@components/Textarea.svelte";
 
   let inputCanvas //Binded to the export from input
-  let inputDescription
+  let inputDescription = 'Mixer that is fun to use'
 
   /** @param {HTMLCanvasElement} canvas */
   export function captureFrame(canvas) {
@@ -21,8 +21,13 @@
       console.log(blob);
       imageUpload(blob, saveInputUrl)
       sendToAPI(
-        'Turn the object in the picture into a sleek product design of ' + inputDescription,
-        'people, clutter, backgroung',
+        //Promt
+        'Turn the object in the picture into a sleek product design' +
+        inputDescription +
+        ', in the style of Stefano Marzano, philips design' +
+        ', realism, rendering, futurism, --q2',
+        //Negative promt
+        'people, clutter, background (drawing) (painting)',
         blob)
     }, 'image/jpeg');
   }

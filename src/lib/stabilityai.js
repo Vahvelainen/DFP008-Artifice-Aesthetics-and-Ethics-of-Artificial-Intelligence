@@ -14,22 +14,23 @@ const apiKey = 'sk-tqHNeMMLcKMTBRl9dh2gCHw4neuyZRs0kqyghJvqRdHTL9FI'
 export function sendToAPI(promt, negative_promt, image) {
   const engineId = 'stable-diffusion-512-v2-1' //This engine is faster but guidance scale ssems to differ
   const apiHost = 'https://api.stability.ai'
+  
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `Bearer ${apiKey}`
+  }
 
   const prompts = [
     {text: promt, weight: 1 },
     {text: negative_promt, weight: -1 },
   ]
 
-  const headers = {
-    Accept: 'application/json',
-    Authorization: `Bearer ${apiKey}`
-  }
   const body = {
-    image_strength: 0.7,
+    image_strength: 0.5,
     init_image_mode: "IMAGE_STRENGTH",
     init_image: image,
     //text_prompts: prompts, //set separetely
-    cfg_scale: 7,
+    cfg_scale: 20,
     clip_guidance_preset: "FAST_BLUE",
     sampler: "K_DPM_2_ANCESTRAL",
     samples: 1,

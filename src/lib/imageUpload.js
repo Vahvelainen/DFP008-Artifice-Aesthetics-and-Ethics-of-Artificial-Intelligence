@@ -5,7 +5,6 @@
 
 import { storage } from "@src/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { makeID } from '@lib/utils'
 
 /**
  * Upload image to firebase storage
@@ -31,3 +30,16 @@ export default async function imageUpload(imgFile) {
     console.log(error)
   }
 };
+
+//https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+export function makeID(length=16) {
+  //around 7e+27 possibilities with 16 characters
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+    charactersLength));
+  }
+  return result;
+}

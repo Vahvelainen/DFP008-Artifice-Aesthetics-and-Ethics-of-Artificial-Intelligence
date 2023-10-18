@@ -1,4 +1,5 @@
 <script>
+  import Frame from '@components/Frame.svelte';
   import imageStore from '@stores/imageStore'
 
   //Would be cool to add click for input to set it as input for next generation
@@ -10,54 +11,24 @@
   
 </script>
 
-<div class="output">
-  {#if $imageStore.inputUrl} 
-    <img class="input" src={$imageStore.inputUrl} alt="Last upload">
-  {:else}
-    <!-- Placeholder -->
-    <div class="input"></div>
-  {/if}
-
+<Frame>
+  <Frame small subframe>
+    {#if $imageStore.inputUrl} 
+      <img src={$imageStore.inputUrl} alt="Last upload">
+    {/if}
+  </Frame>
+  
   {#if $imageStore.outputUrl} 
-    <img class="generated" src={$imageStore.outputUrl} alt="Stable diffusion">
+    <img src={$imageStore.outputUrl} alt="Stable diffusion">
   {:else}
     <!-- Placeholder -->
-    <div class="generated">
-      <p>Generate something</p>
-    </div>
+    <p>Generate something</p>
   {/if}
-</div>
+</Frame>
 
 <style>
-  .output {
-    /* Same as output, could be made to a svelte class */
-    position: relative;
-    max-width: 640px;
-    width: 100%;
-    aspect-ratio: 640/512;
-    border-radius: 10px;
-    border: 2px solid #00DEC6;
-    overflow: hidden;
-    margin-bottom: 1em;
-  }
-  div.input{
-    aspect-ratio: 640/512;
-  }
-  .generated{
+  img{
     width: 100%;
     object-fit: contain;
-  }
-  .input{
-    position: absolute;
-    left: 1em;
-    bottom: 1em;
-    width: 8em;
-    border-radius: 6px;
-    border: 1px solid #00DEC6;
-  }
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 </style>

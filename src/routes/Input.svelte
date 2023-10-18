@@ -5,6 +5,7 @@
   */
   import { onMount } from "svelte"
   import IconButton from "@components/IconButton.svelte"
+  import Frame from "@components/Frame.svelte";
 
   export let canvas 
   let onVideo
@@ -106,27 +107,15 @@
   }
 
 </script>
-
-<div class="input">
+<Frame>
   <div class="button-floater">
     <IconButton on:click={ () => startVideo() }>Video</IconButton>
     <IconButton file on:change={ setImage }>Image</IconButton>
   </div>
   <canvas id="input_canvas"></canvas>
-</div>
+</Frame>
 
 <style>
-  .input {
-    /* Same as output, could be made to a svelte class */
-    position: relative;
-    max-width: 640px;
-    width: 100%;
-    aspect-ratio: 640/512;
-    border-radius: 10px;
-    border: 2px solid #00DEC6;
-    overflow: hidden;
-    margin-bottom: 1em;
-  }
   .button-floater{
     position: absolute;
     top: 1em;

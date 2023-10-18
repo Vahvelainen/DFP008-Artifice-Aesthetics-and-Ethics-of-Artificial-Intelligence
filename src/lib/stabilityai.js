@@ -11,23 +11,7 @@ import imageUpload from '@lib/imageUpload'
 //Move to env / config file
 const apiKey = 'sk-tqHNeMMLcKMTBRl9dh2gCHw4neuyZRs0kqyghJvqRdHTL9FI'
 
-/**
- * Send canvas content to stabitily.ai API
- * Upload images to firebase storqage and save urls
- * @param {HTMLCanvasElement} canvas 
- */
-export function captureFrame(canvas) {
-  canvas.toBlob(blob => {
-    console.log(blob);
-    imageUpload(blob, saveInputUrl)
-    sendToAPI(
-      'Turn into a sleek product design and remove the background',
-      'people, clutter, backgroung',
-      blob)
-  }, 'image/jpeg');
-}
-
-function sendToAPI(promt, negative_promt, image) {
+export function sendToAPI(promt, negative_promt, image) {
   const engineId = 'stable-diffusion-512-v2-1' //This engine is faster but guidance scale ssems to differ
   const apiHost = 'https://api.stability.ai'
 
@@ -78,7 +62,7 @@ function sendToAPI(promt, negative_promt, image) {
   .catch(error => console.log('error', error));
 }
 
-function saveInputUrl(url) {
+export function saveInputUrl(url) {
   imageStore.update( store => {
     store.inputUrl = url
     return store

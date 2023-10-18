@@ -2,6 +2,9 @@ import imageStore from '@stores/imageStore'
 import imageUpload from "@lib/imageUpload"
 
 /**
+ * !!!Warning!!!
+ * Changes has been made since lat use, refer to stabilityai and its use to adapt if taking back to use
+ * 
  * Saves content of canvas element to firebase storage
  * and send following url as reguest for stablediffusionapi.com img2img endpoint
  * Also sets urls from both firebase and API response to imagestore

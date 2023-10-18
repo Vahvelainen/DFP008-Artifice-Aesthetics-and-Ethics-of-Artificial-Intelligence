@@ -13,11 +13,13 @@
   export let inputDescription //will be used to bind so the value can be setted back
 
   let history = []
+  let count = 0
   let currentIndex = -1
 
   onMount( async ()=>{
     await loadHistoryToStore()
     history = $historyStore.generations
+    count = history.length
     console.log('History ready')
   })
 
@@ -27,7 +29,17 @@
       history = $historyStore.generations
     }
 
-    if ( index >= history.length || index < 0) {
+    //Handle if pictures are added
+    if (history.length != count) {
+      count = history.length
+      if ( index == currentIndex + 1) { //Pressed to see previous
+        index = 1 //Show second to lates
+      } else {
+        index = 0 //Show latest
+      }
+    }
+
+    if ( index >= count|| index < 0) {
       return
     }
     const generation = history[index]

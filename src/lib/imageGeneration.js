@@ -7,6 +7,7 @@
  */
 
 import { saveInputUrl, saveOutputUrl } from '@stores/imageStore'
+import { addToHistory } from '@stores/historyStore'
 
 import imageUpload from './imageUpload'
 import { saveGeneration } from './firestore'
@@ -40,6 +41,7 @@ export default async function genrateImage(promt, negative_promt, file, descript
   await Promise.all([uploadPromise, apiPromise])
 
   saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
+  addToHistory(inputUrl, outputUrl, description)
 }
 
 //Will be needed

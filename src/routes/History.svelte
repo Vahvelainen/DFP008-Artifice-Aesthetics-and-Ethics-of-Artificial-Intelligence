@@ -1,5 +1,5 @@
 <script>
-  import { getHistory } from '@lib/firestore'
+  import historyStore, { loadHistoryToStore } from '@stores/historyStore'
   import { saveInputUrl, saveOutputUrl } from '@stores/imageStore'
   import { onMount } from 'svelte';
   import IconButton from "@components/IconButton.svelte"
@@ -16,12 +16,18 @@
   let currentIndex = 0
 
   onMount( async ()=>{
-    history = await getHistory()
+    await loadHistoryToStore()
+    history = $historyStore.generations
     currentIndex = history.length
     console.log('History ready')
   })
 
   function setImage(index) {
+    //Update history from the store
+    if ($historyStore.loaded) {
+      history = $historyStore.generations
+    }
+
     if ( index >= history.length || index < 0) {
       return
     }

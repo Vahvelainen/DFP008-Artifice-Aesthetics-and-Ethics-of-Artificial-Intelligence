@@ -1,17 +1,17 @@
 <script>
 
   export let file = false;
-
+  export let secondary = false;
 
 </script>
 
 {#if file}
   <input type="file" id="imageInput" accept="image/*" on:change >
-  <label for='imageInput'>
+  <label class={secondary ? 'secondary' : 'primary' } for='imageInput'>
     <slot/>
   </label>
 {:else}
-  <button on:click>
+  <button class={secondary ? 'secondary' : 'primary' } on:click>
     <slot/>
   </button>
 {/if}
@@ -21,11 +21,11 @@
   input {
     display: none;
   }
-  button {
+  .primary {
     background-color: #3D00BB;
     color: white;
   }
-  label {
+  .secondary {
     background-color: #C483FF;
     color: black;
   }

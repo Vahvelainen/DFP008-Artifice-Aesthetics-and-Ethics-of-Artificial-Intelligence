@@ -6,12 +6,11 @@
  * - Setting up the store where urls are
  */
 
-import imageStore from '@stores/imageStore'
+import { saveInputUrl, saveOutputUrl } from '@stores/imageStore'
 
 import imageUpload from './imageUpload'
 import { saveGeneration } from './firestore'
 import { sendToAPI } from "@lib/stabilityai"
-
 
 
 export default async function genrateImage(promt, negative_promt, file, description = '') {
@@ -41,20 +40,6 @@ export default async function genrateImage(promt, negative_promt, file, descript
   await Promise.all([uploadPromise, apiPromise])
 
   saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
-}
-
-function saveInputUrl(url) {
-  imageStore.update( store => {
-    store.inputUrl = url
-    return store
-  })
-}
-
-function saveOutputUrl(url) {
-  imageStore.update( store => {
-    store.outputUrl = url
-    return store
-  })
 }
 
 //Will be needed

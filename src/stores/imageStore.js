@@ -14,3 +14,17 @@ export const resetimageStore = () => {
 }
 
 export default imageStore;
+
+export function saveInputUrl(url) {
+  imageStore.update( store => {
+    store.inputUrl = url
+    return store
+  })
+}
+
+export function saveOutputUrl(url) {
+  imageStore.update( store => {
+    store.outputUrl = url
+    return store
+  })
+}

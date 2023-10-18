@@ -11,7 +11,9 @@
   import History from "./History.svelte";
   import WideButton from "@components/WideButton.svelte"
   import Textarea from "@components/Textarea.svelte";
-
+  
+  import imageStore from '@stores/imageStore'
+  
   let inputCanvas //Binded to the export from input
   let inputDescription = 'Mixer that is fun to use'
 
@@ -39,7 +41,11 @@
   <div class="input">
     <Input bind:canvas={inputCanvas} />
     <Textarea bind:value={inputDescription} />
-    <WideButton on:click={ () => captureFrame(inputCanvas) }>Generate Image</WideButton>
+    {#if !$imageStore.loading }
+      <WideButton on:click={ () => captureFrame(inputCanvas) }>Generate Image</WideButton>
+    {:else}
+      <WideButton>Generating...</WideButton>
+    {/if}
   </div>
 
   <div class="output">

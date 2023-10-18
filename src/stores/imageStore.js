@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 const imageStoreTemplate = {
   inputUrl: null,
   outputUrl: null,
+  loading: false,
 }
 
 const imageStore = writable(imageStoreTemplate);
@@ -14,6 +15,13 @@ export const resetimageStore = () => {
 }
 
 export default imageStore;
+
+export function setLoading(bool) {
+  imageStore.update( store => {
+    store.loading = bool
+    return store
+  })
+}
 
 export function saveInputUrl(url) {
   imageStore.update( store => {

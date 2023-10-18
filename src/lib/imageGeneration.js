@@ -6,7 +6,7 @@
  * - Setting up the store where urls are
  */
 
-import { saveInputUrl, saveOutputUrl } from '@stores/imageStore'
+import { setLoading, saveInputUrl, saveOutputUrl } from '@stores/imageStore'
 import { addToHistory } from '@stores/historyStore'
 
 import imageUpload from './imageUpload'
@@ -15,6 +15,8 @@ import { sendToAPI } from "@lib/stabilityai"
 
 
 export default async function genrateImage(promt, negative_promt, file, description = '') {
+  setLoading(true)
+
   let inputUrl
   let outputUrl
 
@@ -42,6 +44,8 @@ export default async function genrateImage(promt, negative_promt, file, descript
 
   saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
   addToHistory(inputUrl, outputUrl, description)
+
+  setLoading(false)
 }
 
 //Will be needed

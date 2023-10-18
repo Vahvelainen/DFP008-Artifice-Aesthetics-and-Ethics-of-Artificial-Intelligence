@@ -4,7 +4,7 @@
    * Error handling
   */
 
-  import genrateImage from "@lib/imageGeneration"
+  import generateImage from "@lib/imageGeneration"
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'
@@ -22,9 +22,9 @@
     canvas.toBlob(blob => {
       console.log(blob);
       //Upload input to firebase and set it to a store
-      genrateImage(
+      generateImage(
         //Promt
-        'Turn the object in the picture into a sleek product design' +
+        'Turn the object in the picture into a sleek product design of ' +
         inputDescription +
         ', in the style of Stefano Marzano, philips design' +
         ', realism, rendering, futurism, --q2',

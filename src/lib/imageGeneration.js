@@ -14,7 +14,7 @@ import { saveGeneration } from './firestore'
 import { sendToAPI } from "@lib/stabilityai"
 
 
-export default async function genrateImage(promt, negative_promt, file, description = '') {
+export default async function generateImage(promt, negative_promt, file, description = '') {
   setLoading(true)
 
   let inputUrl

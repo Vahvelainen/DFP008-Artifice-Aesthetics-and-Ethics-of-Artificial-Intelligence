@@ -8,11 +8,15 @@
 {#if file}
   <input type="file" id="imageInput" accept="image/*" on:change >
   <label class={secondary ? 'secondary' : 'primary' } for='imageInput'>
-    <slot/>
+    <span class="material-icon">
+      <slot/>
+    </span>
   </label>
 {:else}
   <button class={secondary ? 'secondary' : 'primary' } on:click>
-    <slot/>
+    <span class="material-icon">
+      <slot/>
+    </span>
   </button>
 {/if}
 

@@ -41,9 +41,9 @@
 </script>
 
 <div>
-  <IconButton secondary on:click={ () => setImage(currentIndex + 1) }>Back</IconButton>
-  <IconButton secondary on:click={ () => setImage(currentIndex - 1) }>Forward</IconButton>
-  <IconButton secondary on:click={ () => setImage(0) }>Latest</IconButton>
+  <IconButton secondary on:click={ () => setImage(currentIndex + 1) }>fast_rewind</IconButton>
+  <IconButton secondary on:click={ () => setImage(currentIndex - 1) }>fast_forward</IconButton>
+  <IconButton secondary on:click={ () => setImage(0) }>skip_next</IconButton>
 </div>
 
 <style>

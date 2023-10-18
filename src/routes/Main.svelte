@@ -41,11 +41,7 @@
   <div class="input">
     <Input bind:canvas={inputCanvas} />
     <Textarea bind:value={inputDescription} />
-    {#if !$imageStore.loading }
-      <WideButton on:click={ () => captureFrame(inputCanvas) }>Generate Image</WideButton>
-    {:else}
-      <WideButton>Generating...</WideButton>
-    {/if}
+    <WideButton on:click={ () => captureFrame(inputCanvas) } loading={$imageStore.loading}>Generate Image</WideButton>
   </div>
 
   <div class="output">

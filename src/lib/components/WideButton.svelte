@@ -1,10 +1,19 @@
 
-<button class="child" on:click>
-  <slot/>
-</button>
+<script>
+  export let loading = false;
+</script>
+
+{#if !loading}
+  <button on:click>
+    <slot/>
+  </button>
+{:else}
+  <button>
+    <span class="material-icon">refresh</span>
+  </button>
+{/if}
 
 <style>
-
   button {
     background-color: #3D00BB;
     color: white;
@@ -18,5 +27,20 @@
     color: white;
     border: none;
     border-radius: 7px;
+  }
+
+  span {
+    display: inline-block;
+    animation: rotateAnimation 2s infinite linear;
+    transform-origin: center center;
+  }
+
+  @keyframes rotateAnimation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>

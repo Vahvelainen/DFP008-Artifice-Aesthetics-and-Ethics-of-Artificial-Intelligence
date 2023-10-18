@@ -109,8 +109,8 @@
 </script>
 <Frame>
   <div class="button-floater">
-    <IconButton on:click={ () => startVideo() }>Video</IconButton>
-    <IconButton file secondary on:change={ setImage }>Image</IconButton>
+    <IconButton on:click={ () => startVideo() }>photo_camera</IconButton>
+    <IconButton file secondary on:change={ setImage }>file_upload</IconButton>
   </div>
   <canvas id="input_canvas"></canvas>
 </Frame>

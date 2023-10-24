@@ -5,8 +5,6 @@
  * 
  * 
  */
-import imageStore from '@stores/imageStore'
-import imageUpload from '@lib/imageUpload'
 
 //Move to env / config file
 const apiKey = 'sk-tqHNeMMLcKMTBRl9dh2gCHw4neuyZRs0kqyghJvqRdHTL9FI'

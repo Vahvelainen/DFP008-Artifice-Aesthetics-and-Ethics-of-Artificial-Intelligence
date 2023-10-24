@@ -18,7 +18,7 @@
   let inputDescription = 'Mixer that is fun to use'
 
   /** @param {HTMLCanvasElement} canvas */
-  export function captureFrame(canvas) {
+  function captureFrame(canvas) {
     canvas.toBlob(blob => {
       console.log(blob);
       //Upload input to firebase and set it to a store

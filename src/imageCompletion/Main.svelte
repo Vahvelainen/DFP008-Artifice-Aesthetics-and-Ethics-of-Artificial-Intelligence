@@ -4,15 +4,15 @@
    * Error handling
   */
 
-  import generateImage from "@lib/imageGeneration"
+  import generateImage from "./scripts/imageGeneration"
 
   import Output from "./Output.svelte";
   import Input from './Input.svelte'
   import History from "./History.svelte";
-  import WideButton from "@components/WideButton.svelte"
-  import Textarea from "@components/Textarea.svelte";
+  import WideButton from "@lib/WideButton.svelte"
+  import Textarea from "@lib/Textarea.svelte";
   
-  import imageStore from '@stores/imageStore'
+  import imageStore from './scripts/imageStore'
   
   let inputCanvas //Binded to the export from input
   let inputDescription = 'Mixer that is fun to use'

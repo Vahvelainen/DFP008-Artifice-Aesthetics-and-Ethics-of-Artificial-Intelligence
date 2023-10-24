@@ -4,8 +4,8 @@
    * 
   */
   import { onMount } from "svelte"
-  import IconButton from "@components/IconButton.svelte"
-  import Frame from "@components/Frame.svelte";
+  import IconButton from "@lib/IconButton.svelte"
+  import Frame from "@lib/Frame.svelte";
 
   export let canvas 
   let onVideo

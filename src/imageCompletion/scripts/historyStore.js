@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { getHistory } from '@lib/firestore'
+import { getHistory } from './firestore'
 
 const historyStoreTemplate = {
   generations: [],

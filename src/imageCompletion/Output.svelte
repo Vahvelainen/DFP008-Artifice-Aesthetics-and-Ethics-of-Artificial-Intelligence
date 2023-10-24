@@ -1,6 +1,6 @@
 <script>
-  import Frame from '@components/Frame.svelte';
-  import imageStore from '@stores/imageStore'
+  import Frame from '@lib/Frame.svelte';
+  import imageStore from './scripts/imageStore'
 
   //Would be cool to add click for input to set it as input for next generation
 

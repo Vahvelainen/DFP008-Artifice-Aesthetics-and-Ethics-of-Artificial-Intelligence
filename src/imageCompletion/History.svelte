@@ -1,8 +1,8 @@
 <script>
-  import historyStore, { loadHistoryToStore } from '@stores/historyStore'
-  import { saveInputUrl, saveOutputUrl } from '@stores/imageStore'
+  import historyStore, { loadHistoryToStore } from './scripts/historyStore'
+  import { saveInputUrl, saveOutputUrl } from './scripts/imageStore'
   import { onMount } from 'svelte';
-  import IconButton from "@components/IconButton.svelte"
+  import IconButton from "@lib/IconButton.svelte"
 
   /**
    * Suffling between old generations

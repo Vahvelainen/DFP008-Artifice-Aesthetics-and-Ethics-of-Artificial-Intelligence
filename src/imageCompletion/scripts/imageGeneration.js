@@ -6,12 +6,12 @@
  * - Setting up the store where urls are
  */
 
-import { setLoading, saveInputUrl, saveOutputUrl } from '@stores/imageStore'
-import { addToHistory } from '@stores/historyStore'
+import { setLoading, saveInputUrl, saveOutputUrl } from './imageStore'
+import { addToHistory } from './historyStore'
 
 import imageUpload from './imageUpload'
 import { saveGeneration } from './firestore'
-import { sendToAPI } from "@lib/stabilityai"
+import { sendToAPI } from "./stabilityai"
 
 
 export default async function generateImage(promt, negative_promt, file, description = '') {

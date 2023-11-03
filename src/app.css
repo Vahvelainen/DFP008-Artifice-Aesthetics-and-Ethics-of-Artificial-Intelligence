@@ -9,6 +9,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+button, label {
+  /* Label only for file upload atm */
+  cursor: pointer;
+}
+
 .material-icon {
   font-family: 'Material Icons';
   font-weight: normal;

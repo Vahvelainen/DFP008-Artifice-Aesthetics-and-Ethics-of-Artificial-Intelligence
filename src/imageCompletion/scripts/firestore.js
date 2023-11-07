@@ -22,7 +22,7 @@ export async function saveGeneration(inputUrl, outputUrl, promt, negative_promt,
 
 export async function getHistory() {
   const ref = collection(db, "generations")
-  const q = query(ref, orderBy("created", "desc"), limit(20));
+  const q = query(ref, orderBy("created", "desc"), limit(50));
 
   let generations = []
 

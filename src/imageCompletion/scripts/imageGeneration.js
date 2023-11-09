@@ -11,7 +11,7 @@ import { addToHistory } from './historyStore'
 
 import imageUpload from './imageUpload'
 import { saveGeneration } from './firestore'
-import { sendToAPI } from "./stabilityai"
+import { img2img } from "./img2img" 
 
 
 export default async function generateImage(promt, negative_promt, file, description = '') {
@@ -29,10 +29,8 @@ export default async function generateImage(promt, negative_promt, file, descrip
   })
 
   // send image to stability AI API
-  let apiPromise = sendToAPI(promt, negative_promt, file)
-  .then(response => response.text())
+  let apiPromise = img2img(promt, negative_promt, file)
   .then( async response => {
-    response = JSON.parse(response)
     console.log(response)
     const image = b64toBlob(response.artifacts[0].base64)
     outputUrl = await imageUpload(image)

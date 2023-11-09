@@ -7,13 +7,14 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const functions = require("firebase-functions");
+const stabilityai = require("./stabilityai")
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+//Cloud Function location
+const europeWest = functions.region("europe-west1")
+const europeWestHttps = europeWest.https;
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+//Image generation is callable
+exports.img2img = europeWestHttps.onCall( async (data, context) => {
+  return await stabilityai.img2imgAPI(data.promt, data.negative_promt, data.image)
+});

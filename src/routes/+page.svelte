@@ -3,7 +3,7 @@
 </svelte:head>
 
 <script>
-  import Main from "@imageCompletion/Main.svelte";
+  import Main from "@apps/imageCompletion/Main.svelte";
 </script>
 
 <Main/>

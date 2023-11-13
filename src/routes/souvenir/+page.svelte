@@ -4,7 +4,7 @@
 
 <script>
   //come up with better ways of arranging these
-  import Souvenir from "../../souvenir/show.svelte";
+  import Souvenir from "@apps/souvenir.svelte";
 </script>
 
 <Souvenir/>

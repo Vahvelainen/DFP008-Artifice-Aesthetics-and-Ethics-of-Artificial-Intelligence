@@ -7,9 +7,10 @@
 const fetch = require('make-fetch-happen');
 const FormData = require('form-data');
 const { Readable } = require('stream');
+require('dotenv').config()
 
-//Move to env / config file
-const apiKey = 'sk-tqHNeMMLcKMTBRl9dh2gCHw4neuyZRs0kqyghJvqRdHTL9FI'
+//API key is set on .env file
+const apiKey = process.env.STABILITYAI_API_KEY
 
 exports.img2imgAPI = img2imgAPI
 

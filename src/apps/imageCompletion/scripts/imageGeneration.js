@@ -6,7 +6,7 @@
  * - Setting up the store where urls are
  */
 
-import { setLoading, saveInputUrl, saveOutputUrl } from './imageStore'
+import { setLoading, saveInputUrl, saveOutputUrl, saveID } from './imageStore'
 import { addToHistory } from './historyStore'
 
 import imageUpload from './imageUpload'
@@ -40,8 +40,9 @@ export default async function generateImage(promt, negative_promt, file, descrip
 
   await Promise.all([uploadPromise, apiPromise])
 
-  saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
-  addToHistory(inputUrl, outputUrl, description)
+  const id = await saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
+  saveID(id)
+  addToHistory(id, inputUrl, outputUrl, description)
 
   setLoading(false)
 }

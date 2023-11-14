@@ -1,7 +1,7 @@
 <script>
   import historyStore, { loadHistoryToStore } from './scripts/historyStore'
-  import { saveInputUrl, saveOutputUrl } from './scripts/imageStore'
-  import { onMount } from 'svelte';
+  import { saveInputUrl, saveOutputUrl, saveID } from './scripts/imageStore'
+  import { onMount } from 'svelte'
   import IconButton from "@lib/IconButton.svelte"
 
   /**
@@ -46,6 +46,7 @@
 
     saveInputUrl(generation.input)
     saveOutputUrl(generation.output)
+    saveID(generation.id)
     inputDescription = generation.description
 
     currentIndex = index;

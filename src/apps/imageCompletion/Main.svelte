@@ -11,6 +11,7 @@
   import History from "./History.svelte";
   import WideButton from "@lib/WideButton.svelte"
   import Textarea from "@lib/Textarea.svelte";
+  import QRlink from './QRlink.svelte'
   
   import imageStore from './scripts/imageStore'
   
@@ -46,7 +47,10 @@
 
   <div class="output">
     <Output/>
-    <History bind:inputDescription />
+    <div class="twoColums">
+      <History bind:inputDescription />
+      <QRlink/>
+    </div>
     <!-- Image history in the future -->
   </div>
 
@@ -63,6 +67,12 @@
   .input, .output {
     max-width: 640px;
     width: 100%;
+  }
+
+  div.twoColums {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
   }
 
 </style>

@@ -16,8 +16,9 @@ export async function saveGeneration(inputUrl, outputUrl, promt, negative_promt,
     // response: JSON.stringify(response),
   });
 
-  console.log("Generation data saved with ID: ", docRef.id);
-
+  const id = docRef.id
+  console.log("Generation data saved with ID: ", id);
+  return id
 }
 
 export async function getHistory() {
@@ -30,7 +31,10 @@ export async function getHistory() {
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
     // console.log(doc.id, " => ", doc.data());
-    generations.push(doc.data())
+    generations.push({
+      id: doc.id,
+      ...doc.data()
+    })
   });
 
   return generations

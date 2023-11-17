@@ -9,10 +9,12 @@ const FormData = require('form-data');
 const { Readable } = require('stream');
 require('dotenv').config()
 
+const apiHost = 'https://api.stability.ai'
 //API key is set on .env file
 const apiKey = process.env.STABILITYAI_API_KEY
 
 exports.img2imgAPI = img2imgAPI
+exports.getEngines = getEngines
 
 /**
  * Send a request to stabilityAI img2img API
@@ -21,6 +23,20 @@ exports.img2imgAPI = img2imgAPI
  * @param {Blob} image 
  * @returns {Promise[ JSON ]} Promise with the image binary somewhere in json
  */
+
+async function getEngines() {
+  const url = `${apiHost}/v1/engines/list`
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  })
+  
+  return JSON.parse( await response.text() )
+}
+
 async function img2imgAPI( promt, negative_promt, image ) {
   const engineId = 'stable-diffusion-512-v2-1' //This engine is faster but guidance scale ssems to differ
   const apiHost = 'https://api.stability.ai'

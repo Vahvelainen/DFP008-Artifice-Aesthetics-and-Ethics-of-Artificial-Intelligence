@@ -18,3 +18,8 @@ const europeWestHttps = europeWest.https;
 exports.img2img = europeWestHttps.onCall( async (data, context) => {
   return await stabilityai.img2imgAPI(data.promt, data.negative_promt, data.image)
 });
+
+//Get enginens
+exports.getEngines = europeWestHttps.onCall( async (data, context) => {
+  return await stabilityai.getEngines()
+});

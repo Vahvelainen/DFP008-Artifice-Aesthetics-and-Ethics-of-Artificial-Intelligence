@@ -16,14 +16,6 @@ const apiKey = process.env.STABILITYAI_API_KEY
 exports.img2imgAPI = img2imgAPI
 exports.getEngines = getEngines
 
-/**
- * Send a request to stabilityAI img2img API
- * @param {String} promt 
- * @param {String} negative_promt 
- * @param {Blob} image 
- * @returns {Promise[ JSON ]} Promise with the image binary somewhere in json
- */
-
 async function getEngines() {
   const url = `${apiHost}/v1/engines/list`
 
@@ -37,6 +29,13 @@ async function getEngines() {
   return JSON.parse( await response.text() )
 }
 
+/**
+ * Send a request to stabilityAI img2img API
+ * @param {String} promt 
+ * @param {String} negative_promt 
+ * @param {Blob} image 
+ * @returns {Promise[ JSON ]} Promise with the image binary somewhere in json
+ */
 async function img2imgAPI( promt, negative_promt, image ) {
   const engineId = 'stable-diffusion-512-v2-1' //This engine is faster but guidance scale ssems to differ
   const apiHost = 'https://api.stability.ai'

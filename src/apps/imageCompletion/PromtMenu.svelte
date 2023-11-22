@@ -1,4 +1,5 @@
 <script>
+    import { scale } from "svelte/transition";
   import ChoosePromtOption from "./ChoosePromtOption.svelte";
   import PromtBubble from "./PromtBubble.svelte";
   import promtchoises from "./promtchoises";
@@ -16,7 +17,7 @@
         promt = promt + ', ' + selection.promt
       }
     }
-    console.log(promt)
+    console.log('Current promt: ', promt)
   }
 
   let selecting = undefined
@@ -25,20 +26,21 @@
   function makeSelection(e) {
     selections[ promtchoises.findIndex( e => e === selecting) ] = e.detail
     selecting = undefined
-    console.log(selections)
   }
 
 </script>
 
 <div class="parent">
   {#if selecting}
-    <ChoosePromtOption
-      name={selecting.name}
-      options={selecting.options}
-      on:select={ makeSelection }
-    />
+    <div in:scale>
+      <ChoosePromtOption
+        name={selecting.name}
+        options={selecting.options}
+        on:select={ makeSelection }
+      />
+    </div>
   {:else}
-    <div class="relative">
+    <div class="relative" in:scale>
       <div class="center">
         <h2>{name}</h2>
       </div>

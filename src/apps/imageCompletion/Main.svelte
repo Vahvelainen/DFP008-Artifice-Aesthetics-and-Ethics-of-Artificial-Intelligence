@@ -6,14 +6,8 @@
 
   import generateImage from "./scripts/imageGeneration"
 
-  import Output from "./Output.svelte";
-  import Input from './Input.svelte'
-  import History from "./History.svelte";
-  import WideButton from "@lib/WideButton.svelte"
-  import Textarea from "@lib/Textarea.svelte";
-  import QRlink from './QRlink.svelte'
-  
-  import imageStore from './scripts/imageStore'
+  import ImageSide from "./ImageSide.svelte";
+  import PromtMenu from "./PromtMenu.svelte";
   
   let inputCanvas //Binded to the export from input
   let inputDescription = 'Mixer that is fun to use'
@@ -38,41 +32,14 @@
 </script>
 
 <section class="image-generation">
-
-  <div class="input">
-    <Input bind:canvas={inputCanvas} />
-    <Textarea bind:value={inputDescription} />
-    <WideButton on:click={ () => captureFrame(inputCanvas) } loading={$imageStore.loading}>Generate Image</WideButton>
-  </div>
-
-  <div class="output">
-    <Output/>
-    <div class="twoColums">
-      <History bind:inputDescription />
-      <QRlink/>
-    </div>
-    <!-- Image history in the future -->
-  </div>
-
+  <!-- These might be should be stylised here for the widths to make them work -->
+  <PromtMenu/>
+  <ImageSide/>
 </section>
 
 <style>
   .image-generation {
     display: flex;
     justify-content: space-between;
-    max-width: 1300px;
-    margin: auto;
   }
-
-  .input, .output {
-    max-width: 640px;
-    width: 100%;
-  }
-
-  div.twoColums {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1em;
-  }
-
 </style>

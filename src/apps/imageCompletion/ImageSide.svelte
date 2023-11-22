@@ -3,6 +3,8 @@
   import Output from './Output.svelte'
   import WideButton from "@lib/WideButton.svelte"
 
+  import imageStore from './scripts/imageStore' 
+
   //we use this to toggle between showing result etc
 
   //Image generation is propably 
@@ -15,6 +17,8 @@
   {#if inputting}
     <Input bind:canvas/>
     <WideButton on:click={ () => inputting = false } >Check The Outcome</WideButton>
+  {:else if $imageStore.loading}
+    <div class="loading-spinner"></div>
   {:else}
     <Output/>
     <div class="two-buttons">
@@ -34,5 +38,23 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
+  }
+  .loading-spinner {
+    height: 6em;
+    width: 6em;
+    animation: rotateAnimation 2s infinite linear;
+
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: white white transparent white;
+    border-radius: 50%;
+  }
+  @keyframes rotateAnimation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>

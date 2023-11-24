@@ -1,5 +1,5 @@
 <script>
-    import { scale } from "svelte/transition";
+  import { scale } from "svelte/transition";
   import ChoosePromtOption from "./ChoosePromtOption.svelte";
   import PromtBubble from "./PromtBubble.svelte";
   import promtchoises from "./promtchoises";
@@ -17,7 +17,6 @@
         promt = promt + ', ' + selection.promt
       }
     }
-    console.log('Current promt: ', promt)
   }
 
   let selecting = undefined
@@ -48,7 +47,7 @@
         <PromtBubble
           name={choice.name}
           selection = {selections[i]}
-          angle = { 30 * i + 45 }
+          angle = { 55 * i + 45 }
           on:click={ () => selecting = choice }
         />      
       {/each}

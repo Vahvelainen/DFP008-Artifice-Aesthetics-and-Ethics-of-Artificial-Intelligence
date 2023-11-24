@@ -3,7 +3,7 @@
   import generateImage from "./scripts/imageGeneration"
 
   import Input from "./Input.svelte"
-  import Output from './Output.svelte'
+  import Frame from '@lib/Frame.svelte'
   import WideButton from "@lib/WideButton.svelte"
 
   import imageStore, {saveOutputUrl} from './scripts/imageStore' 
@@ -68,7 +68,10 @@
     <Input bind:canvas/>
     <WideButton on:click={startGenerate} >Check The Outcome</WideButton>
   {:else}
-    <Output/>
+    <!-- Image output -->
+    <Frame>
+      <img src={$imageStore.outputUrl} alt="Stable diffusion">
+    </Frame>
     {#if $imageStore.loading}
       <div class="loading-spinner"></div>
     {:else}
@@ -85,6 +88,10 @@
     width: 50vw;
     padding: 6em 4em;
     text-align: center;
+  }
+  img{
+    width: 100%;
+    object-fit: contain;
   }
   .two-buttons {
     display: grid;

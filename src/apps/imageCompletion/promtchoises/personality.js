@@ -1,6 +1,6 @@
 
 export default {
-  name: 'Your Personality',
+  name: 'Personality',
   options: [
     {
       name: 'Energetic',

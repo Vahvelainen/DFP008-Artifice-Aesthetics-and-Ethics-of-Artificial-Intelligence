@@ -42,7 +42,7 @@
       //Promt
       promt,
       //Negative promt
-      'people, clutter, background (drawing) (painting)',
+      'people',
       inputBlob, 'NEW IXD TEST') //Input description is saved separately to database
   }
 

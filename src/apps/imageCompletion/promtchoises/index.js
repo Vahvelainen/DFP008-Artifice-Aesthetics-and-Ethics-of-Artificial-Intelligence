@@ -4,9 +4,11 @@
 import style from "./style"
 import material from "./material"
 import personality from "./personality"
+import context from "./context"
 
 export default [
   style,
   material,
   personality,
+  context,
 ]

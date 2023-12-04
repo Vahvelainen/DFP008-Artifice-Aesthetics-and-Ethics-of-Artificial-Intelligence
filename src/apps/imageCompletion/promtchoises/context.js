@@ -30,7 +30,7 @@ export default {
     {
       name: 'Outer space',
       img: 'https://i.pinimg.com/564x/72/a5/d5/72a5d5a24237408ac32dad45be993a59.jpg',
-      promt: 'The white background is the outer space with stars'
+      promt: 'Mars, mysteious, boundless, rocky, soft glow'
     },
   ]
 }

@@ -6,19 +6,32 @@
  * - Setting up the store where urls are
  */
 
-import { setLoading, saveInputUrl, saveOutputUrl, saveID } from './imageStore'
+import { setLoading, saveOutputUrl  } from './imageStore'
 import { img2img } from "./img2img" 
+import { addToHistory } from './historyStore'
 
-
-export default async function generateImage(promt, negative_promt, inputImg) {
+/**
+ * Handle various tasks for image generation
+ * @param {Blob} canvas 
+ * @param {String} topic 
+ * @param {JSON[]} selections 
+ * @param {Boolean} inputting 
+ */
+export default async function generateImage(inputBlob, topic, selections, inputting) {
+  let promt = createPromt(topic, selections)
+  let negative_promt = 'people'
 
   setLoading(true)
 
-  //Output
-  let outputImg 
+  if (inputting) {
+    //Temporalily set the input image as output
+    saveOutputUrl(URL.createObjectURL(inputBlob));
+  }
 
+  
   // send image to stability AI API
-  await img2img(promt, negative_promt, inputImg)
+  let outputImg 
+  await img2img(promt, negative_promt, inputBlob)
   .then( async response => {
     console.log(response)
     outputImg = b64toBlob(response.artifacts[0].base64)
@@ -27,7 +40,17 @@ export default async function generateImage(promt, negative_promt, inputImg) {
   .catch(error => console.log('error', error));
   setLoading(false)
 
-  return outputImg
+  addToHistory(inputBlob, outputImg, topic, selections)
+}
+
+export function createPromt(topic, selections) {
+  let promt = 'Finished rendering of a ' + topic
+  for( const selection of selections ) {
+    if(selection) {
+      promt = promt + ', ' + selection.promt
+    }
+  }
+  return promt
 }
 
 //Will be needed

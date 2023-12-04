@@ -7,25 +7,17 @@
   import ImageSide from "./ImageSide.svelte";
   import PromtMenu from "./PromtMenu.svelte";
  
-  import generateImage from "./scripts/imageGeneration"
-  import {saveOutputUrl} from './scripts/imageStore' 
+  import generateImage, {createPromt} from "./scripts/imageGeneration"
 
-  import { addToHistory } from './scripts/historyStore'
-
-  //Promt generation
   let topic = 'Household Appliance'
-  let selections = []//binded to promt menu, passed to image side
+  let selections = []
   let promt 
+  
   $: {
-    promt = 'Finished rendering of a ' + topic
-    for( const selection of selections ) {
-      if(selection) {
-        promt = promt + ', ' + selection.promt
-      }
-    }
+    promt = createPromt(topic, selections)
     handlePromtUpdate(promt)
   }
-
+  
   //Image geneartion
   let canvas //binded to image side for input
   let inputting = true //also binded to imageSide
@@ -39,27 +31,16 @@
   } 
 
   async function startGenerate() {
-    console.log('Start image generation');
-
+    console.log('Start image generation')
     if (inputting) {
       inputBlob = await captureFrame(canvas)
-      //Temporalily set the input image as output
-      saveOutputUrl(URL.createObjectURL(inputBlob));
-    }    
+    }
+    generateImage( inputBlob, topic, selections, inputting )
     inputting = false
-
-    console.log('Input blob:', inputBlob)
-    const outputBlop = await generateImage(
-      //Promt
-      promt,
-      //Negative promt
-      'people',
-      inputBlob)
-
-    addToHistory(inputBlob, outputBlop, topic, selections)
   }
 
-  /** @param {HTMLCanvasElement} canvas */
+  /** Cancas to blob 
+   * @param {HTMLCanvasElement} canvas */
   function captureFrame(canvas) {
     return new Promise((resolve, reject) => {
       canvas.toBlob(blob => {
@@ -73,7 +54,6 @@
       }, 'image/jpeg');
     });
   }
-
 </script>
 
 <section class="image-generation">

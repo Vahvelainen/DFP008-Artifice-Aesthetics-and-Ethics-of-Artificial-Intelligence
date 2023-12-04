@@ -21,5 +21,8 @@
   .image-generation {
     display: flex;
     justify-content: space-between;
+    background:
+      linear-gradient(0deg, rgba(57, 20, 132, 0.5), rgba(57, 20, 132, 0.5)),
+      url('background.jpeg');
   }
 </style>

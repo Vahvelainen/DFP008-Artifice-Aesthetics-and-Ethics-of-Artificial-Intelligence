@@ -1,6 +1,13 @@
 import { writable } from 'svelte/store';
 import { getHistory } from './firestore'
 
+/**
+ * In new version, history consist of all the blob data of the generations
+ * Result will only be saved once the result is accepted
+ * 
+ * A separate app should be created to display the creations on a second screen (also should be saved on a different collection)
+ */
+
 const historyStoreTemplate = {
   generations: [],
   loaded: false,
@@ -16,30 +23,21 @@ export const resetHistoryStore = () => {
 
 export default historyStore;
 
-/** Load the history from firestore and store it to the store */
-export async function loadHistoryToStore(){
-  const generations = await getHistory()
-  historyStore.update( s => {
-    const loadedHistory = {
-        generations: generations,
-        loaded: true,
-      }
-    return loadedHistory
-  })
-}
-
-/** Push a file to end of the history */
-export function addToHistory(id, inputUrl, outpuUrl, description = ''){
+/**
+ * Push a generation to end of the history
+ * @param {Blob} input 
+ * @param {Blob} output 
+ * @param {Array[JSON]} selections 
+ */
+export function addToHistory(input, output, topic, selections){
   historyStore.update( history => {
-    history.generations = [
-      {
-        id: id,
-        input: inputUrl,
-        output: outpuUrl,
-        description: description,
-      },
-      ...history.generations,
-    ]
+    history.generations.push({
+        input: input,
+        output: output,
+        topic: topic,
+        selections: selections,
+      })
+    console.log('History updated: ', history)
     return history
   })
 }

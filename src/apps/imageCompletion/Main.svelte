@@ -10,7 +10,7 @@
   import generateImage from "./scripts/imageGeneration"
   import {saveOutputUrl} from './scripts/imageStore' 
 
-
+  import { addToHistory } from './scripts/historyStore'
 
   //Promt generation
   let topic = 'Household Appliance'
@@ -23,7 +23,6 @@
         promt = promt + ', ' + selection.promt
       }
     }
-    console.log(selections)
     handlePromtUpdate(promt)
   }
 
@@ -50,12 +49,14 @@
     inputting = false
 
     console.log('Input blob:', inputBlob)
-    generateImage(
+    const outputBlop = await generateImage(
       //Promt
       promt,
       //Negative promt
       'people',
-      inputBlob, 'NEW IXD TEST') //Input description is saved separately to database
+      inputBlob)
+
+    addToHistory(inputBlob, outputBlop, topic, selections)
   }
 
   /** @param {HTMLCanvasElement} canvas */

@@ -7,44 +7,27 @@
  */
 
 import { setLoading, saveInputUrl, saveOutputUrl, saveID } from './imageStore'
-import { addToHistory } from './historyStore'
-
-import imageUpload from './imageUpload'
-import { saveGeneration } from './firestore'
 import { img2img } from "./img2img" 
 
 
-export default async function generateImage(promt, negative_promt, file, description = '') {
+export default async function generateImage(promt, negative_promt, inputImg) {
+
   setLoading(true)
 
-  let inputUrl
-  let outputUrl
-
-  // save image to firebase
-  let uploadPromise = imageUpload(file)
-  .then( url => {
-    //Save url to store (will happen before generation, no worries)
-    inputUrl = url 
-    saveInputUrl(url)
-  })
+  //Output
+  let outputImg 
 
   // send image to stability AI API
-  let apiPromise = img2img(promt, negative_promt, file)
+  await img2img(promt, negative_promt, inputImg)
   .then( async response => {
     console.log(response)
-    const image = b64toBlob(response.artifacts[0].base64)
-    outputUrl = await imageUpload(image)
-    saveOutputUrl(outputUrl)
+    outputImg = b64toBlob(response.artifacts[0].base64)
+    saveOutputUrl(URL.createObjectURL(outputImg))
   })
   .catch(error => console.log('error', error));
-
-  await Promise.all([uploadPromise, apiPromise])
-
-  const id = await saveGeneration(inputUrl, outputUrl, promt, negative_promt, description)
-  saveID(id)
-  addToHistory(id, inputUrl, outputUrl, description)
-
   setLoading(false)
+
+  return outputImg
 }
 
 //Will be needed

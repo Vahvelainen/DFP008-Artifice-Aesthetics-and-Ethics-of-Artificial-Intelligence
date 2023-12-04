@@ -10,15 +10,27 @@
   import generateImage from "./scripts/imageGeneration"
   import {saveOutputUrl} from './scripts/imageStore' 
 
-  let promt //bonded to promt menu, passed to image side
+
+
+  //Promt generation
+  let topic = 'Household Appliance'
+  let selections = []//binded to promt menu, passed to image side
+  let promt 
+  $: {
+    promt = 'Finished rendering of a ' + topic
+    for( const selection of selections ) {
+      if(selection) {
+        promt = promt + ', ' + selection.promt
+      }
+    }
+    console.log(selections)
+    handlePromtUpdate(promt)
+  }
+
+  //Image geneartion
   let canvas //binded to image side for input
   let inputting = true //also binded to imageSide
   let inputBlob
-
-  //Dynamic function that changes when promt changes
-  $: {
-    handlePromtUpdate(promt)
-  }
 
   function handlePromtUpdate(promt) {
     console.log('Current promt: ', promt)
@@ -65,7 +77,7 @@
 
 <section class="image-generation">
   <!-- These might be should be stylised here for the widths to make them work -->
-  <PromtMenu bind:promt />
+  <PromtMenu topic={topic} bind:selections />
   <ImageSide
     bind:canvas
     bind:inputting

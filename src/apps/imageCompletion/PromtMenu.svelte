@@ -6,24 +6,18 @@
 
   // Though of naming this to BubbleMenu if is going to be more general element but lest start from the intented use
   // Name will be from the earlier selections somehow, possibly url param.
-  export let name = 'Design Your Household Appliances'
-
-  export let promt
-
-  $: {
-    promt = 'Finished rendering of a Household Appliance'
-    for( const selection of selections ) {
-      if(selection) {
-        promt = promt + ', ' + selection.promt
-      }
-    }
-  }
+  export let topic
 
   let selecting = undefined
-  let selections = Array(promtchoises.length).fill(undefined)
+  export let selections = Array(promtchoises.length).fill(undefined)
 
   function makeSelection(e) {
-    selections[ promtchoises.findIndex( e => e === selecting) ] = e.detail
+    selections[ promtchoises.findIndex( e => e === selecting) ] = {
+      id: selecting.name,
+      img: e.detail.img,
+      name: e.detail.name,
+      promt: e.detail.promt,
+    }
     selecting = undefined
   }
 
@@ -41,7 +35,7 @@
   {:else}
     <div class="relative" in:scale>
       <div class="center">
-        <h2>{name}</h2>
+        <h2>Design Your {topic}</h2>
       </div>
       {#each promtchoises as choice, i }
         <PromtBubble

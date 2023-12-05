@@ -9,6 +9,7 @@
   import History from "./History.svelte";
  
   import generateImage, {createPromt} from "./scripts/imageGeneration"
+  import {saveGeneration} from "./scripts/firestore"
 
   let showHistory = false
   let topic = 'Household Appliance'
@@ -17,6 +18,7 @@
   
   $: {
     promt = createPromt(topic, selections)
+    console.log(selections)
     handlePromtUpdate(promt)
   }
   
@@ -32,6 +34,11 @@
       startGenerate()
     }
   } 
+
+  async function saveAndProceed() {
+    console.log('asd')
+    const id = saveGeneration(inputBlob, outputBlob, topic, selections)
+  }
 
   async function startGenerate() {
     console.log('Start image generation')
@@ -68,6 +75,7 @@
     bind:inputting
     on:generate={startGenerate} 
     on:history={ () => showHistory = true }
+    on:complete={ saveAndProceed }
   />
   <History 
     bind:show={showHistory}

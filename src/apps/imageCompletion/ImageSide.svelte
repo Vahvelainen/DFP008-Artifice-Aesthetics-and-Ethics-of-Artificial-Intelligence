@@ -12,6 +12,13 @@
   export let inputting //true wehn inputting new image
   export let canvas
 
+  let saving = false
+
+  function handleCompleteClick() {
+    dispatch('complete')
+    saving = true
+  }
+
 </script>
 
 <div class="parent">
@@ -36,7 +43,7 @@
     {:else}
       <div class="two-buttons">
         <WideButton on:click={ () => inputting = true } >Retry</WideButton>
-        <WideButton>I am happy</WideButton>
+        <WideButton on:click={ handleCompleteClick } loading={saving} >I am happy</WideButton>
       </div>
     {/if}
   {/if}

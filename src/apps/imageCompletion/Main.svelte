@@ -6,9 +6,11 @@
  
   import ImageSide from "./ImageSide.svelte";
   import PromtMenu from "./PromtMenu.svelte";
+  import History from "./History.svelte";
  
   import generateImage, {createPromt} from "./scripts/imageGeneration"
 
+  let showHistory = false
   let topic = 'Household Appliance'
   let selections = []
   let promt 
@@ -22,6 +24,7 @@
   let canvas //binded to image side for input
   let inputting = true //also binded to imageSide
   let inputBlob
+  let outputBlob
 
   function handlePromtUpdate(promt) {
     console.log('Current promt: ', promt)
@@ -35,8 +38,9 @@
     if (inputting) {
       inputBlob = await captureFrame(canvas)
     }
-    generateImage( inputBlob, topic, selections, inputting )
+    const imagePromise = generateImage( inputBlob, topic, selections, inputting )
     inputting = false
+    outputBlob = await imagePromise
   }
 
   /** Cancas to blob 
@@ -63,6 +67,14 @@
     bind:canvas
     bind:inputting
     on:generate={startGenerate} 
+    on:history={ () => showHistory = true }
+  />
+  <History 
+    bind:show={showHistory}
+    bind:inputting
+    bind:selections
+    bind:inputBlob
+    bind:outputBlob
   />
 </section>
 

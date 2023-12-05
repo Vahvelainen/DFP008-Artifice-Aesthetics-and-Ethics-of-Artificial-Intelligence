@@ -35,7 +35,7 @@ export function addToHistory(input, output, topic, selections){
         input: input,
         output: output,
         topic: topic,
-        selections: selections,
+        selections: [...selections],
       })
     console.log('History updated: ', history)
     return history

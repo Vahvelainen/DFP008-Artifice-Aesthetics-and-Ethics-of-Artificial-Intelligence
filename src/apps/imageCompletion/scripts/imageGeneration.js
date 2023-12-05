@@ -41,6 +41,8 @@ export default async function generateImage(inputBlob, topic, selections, inputt
   setLoading(false)
 
   addToHistory(inputBlob, outputImg, topic, selections)
+
+  return outputImg
 }
 
 export function createPromt(topic, selections) {

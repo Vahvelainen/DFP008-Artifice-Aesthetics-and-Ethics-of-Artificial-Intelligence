@@ -2,6 +2,7 @@
   import Input from "./Input.svelte"
   import Frame from '@lib/Frame.svelte'
   import WideButton from "@lib/WideButton.svelte"
+  import historyStore from './scripts/historyStore'
 
   let dispatch = createEventDispatcher()
 
@@ -18,6 +19,14 @@
     <Input bind:canvas/>
     <WideButton on:click={ () => dispatch('generate') } >Check The Outcome</WideButton>
   {:else}
+    <!-- History button -->
+    {#if $historyStore.generations.length > 1 }
+      <div class="historyBtnFloater">
+        <button class="historyBtn" on:click={ () => dispatch('history') } >
+          <h3>History</h3>
+        </button>
+      </div>
+    {/if}
     <!-- Image output -->
     <Frame>
       <img src={$imageStore.outputUrl} alt="Stable diffusion">
@@ -38,10 +47,27 @@
     width: 50vw;
     padding: 6em 4em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   img{
     width: 100%;
     object-fit: contain;
+  }
+  .historyBtnFloater{
+    display: flex;
+    width: 100%;
+  }
+  .historyBtn{
+    z-index: 1;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    height: 7em;
+    width: 7em;
+    border-radius: 50%;
+    border: 4px solid #391484;
+    background-color: orange;
   }
   .two-buttons {
     display: grid;

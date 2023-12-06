@@ -18,13 +18,13 @@
   })
 
   async function setImage(documentID) {
-    const docRef = doc(db, "generations", documentID)
+    const docRef = doc(db, "generations_v2", documentID)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
       const docData = docSnap.data()
       console.log("Document data:", docData)
       creationImageUrl = docData.output
-      description = docData.description
+      description = docData.topic
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!")

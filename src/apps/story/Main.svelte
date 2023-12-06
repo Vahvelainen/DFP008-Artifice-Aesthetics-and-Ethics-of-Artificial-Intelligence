@@ -2,6 +2,7 @@
   import Intro from './Intro.svelte'
   import Build from './Build.svelte'
   import Result from './Result.svelte'
+  import Souvenir from './Souvenir.svelte'
 
   import loadBuild from './loadBuild'
   import { onMount } from 'svelte'
@@ -13,12 +14,14 @@
   }) 
 
   // http://localhost:5173/story?id=diRH3ygtWmCHRuE7ICph
+  // https://aicocreate.web.app/story?id=diRH3ygtWmCHRuE7ICph
 </script>
 
 <div class="story">
   <Intro data={data}/>
   <Build data={data}/>
   <Result data={data}/>
+  <Souvenir data={data} />
 </div>
 
 <style>

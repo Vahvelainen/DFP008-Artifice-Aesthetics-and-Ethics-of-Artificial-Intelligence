@@ -14,7 +14,8 @@ export default async function loadBuild() {
     let docData = docSnap.data()
     docData = {
       ...docData,
-      selections: JSON.parse(docData.selections)
+      selections: JSON.parse(docData.selections),
+      id: documentID,
     }
     console.log("Document data:", docData)
     return docData

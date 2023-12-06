@@ -8,6 +8,7 @@
   import PromtMenu from "./PromtMenu.svelte";
   import History from "./History.svelte";
  
+  import { goto } from '$app/navigation';
   import generateImage, {createPromt} from "./scripts/imageGeneration"
   import {saveGeneration} from "./scripts/firestore"
 
@@ -37,7 +38,8 @@
 
   async function saveAndProceed() {
     console.log('asd')
-    const id = saveGeneration(inputBlob, outputBlob, topic, selections)
+    const id = await saveGeneration(inputBlob, outputBlob, topic, selections)
+    goto('/story?id=' + id)
   }
 
   async function startGenerate() {

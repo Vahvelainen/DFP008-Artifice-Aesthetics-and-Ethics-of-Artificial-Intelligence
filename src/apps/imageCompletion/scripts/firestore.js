@@ -24,22 +24,3 @@ export async function saveGeneration(inputBlob, outputBlob, topic, selections ) 
   console.log("Generation data saved with ID: ", id);
   return id
 }
-
-export async function getHistory() {
-  const ref = collection(db, "generations")
-  const q = query(ref, orderBy("created", "desc"), limit(50));
-
-  let generations = []
-
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    // console.log(doc.id, " => ", doc.data());
-    generations.push({
-      id: doc.id,
-      ...doc.data()
-    })
-  });
-
-  return generations
-}

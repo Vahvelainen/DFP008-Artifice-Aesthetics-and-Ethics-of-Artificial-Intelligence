@@ -52,7 +52,12 @@
 
   function startVideo() {
     // Access the user's webcam stream
-    navigator.mediaDevices.getUserMedia({ video: true })
+    const constrains = {
+      video: {
+        facingMode: 'environment',
+      }
+    }
+    navigator.mediaDevices.getUserMedia(constrains)
       .then(function(stream) {
         // Create a video element to display the webcam stream
         video.srcObject = stream;

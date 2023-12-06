@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-import { getHistory } from './firestore'
 
 /**
  * In new version, history consist of all the blob data of the generations

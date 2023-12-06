@@ -1,6 +1,25 @@
 
 <script>
   export let data
+
+  function paseBuildDescription() {
+    let description = 'Being as creative as you are, you built a sophisticated model'
+    const selections = data.selections.filter( s => s )
+    for (const selection of selections) {
+      if (selection === selections[0]) {
+        description += ' with '
+      } else if ( selection === selections[selections.length-1] ) {
+        description += ' and '
+      } else {
+        description += ', '
+      }
+      description += selection.name.toLowerCase() + ' ' + selection.id.toLowerCase()
+    }
+    if (selections.length) {
+      description += ' as your theme'
+    }
+    return description
+  }
 </script>
 
 {#if data}
@@ -21,7 +40,7 @@
     </div>
     <img class="input" src={data?.input} alt="Your building">
     <div class="description">
-      <p>Being as creative as you are, you built a sophisticated model, with minimalism and plastic material as your theme.</p>
+      <p>{paseBuildDescription()}</p>
     </div>
   </section>
 {/if}

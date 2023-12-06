@@ -16,11 +16,9 @@
 </script>
 
 <div class="story">
-  <div class="container">
-    <Intro/>
-    <Build data={data}/>
-    <Result data={data}/>
-  </div>
+  <Intro data={data}/>
+  <Build data={data}/>
+  <Result data={data}/>
 </div>
 
 <style>
@@ -29,10 +27,7 @@
     color: #391484;
     width: 100%;
     min-height: 100vh;
-  }
-  .container {
-    max-width: 800px;
-    margin: auto;
+    padding: 0 2em;
   }
 </style>
 

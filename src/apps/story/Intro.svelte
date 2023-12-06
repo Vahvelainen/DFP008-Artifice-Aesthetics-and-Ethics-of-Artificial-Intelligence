@@ -2,6 +2,8 @@
   import designersImg from './assets/designers.jpg'
   import squiggle from './assets/squiggle.svg'
   import you from './assets/you.jpg'
+
+  export let data
 </script>
 
 <section class="intro">
@@ -13,7 +15,7 @@
   <div class="you">
     <img class="you" src={you} alt="you">
     <h3>You</h3>
-    <p>Today, we have you, make a great prototype of a household appliance</p>
+    <p>Today, we have you, make a great prototype{data ? ' of a ' + data.topic : ''}</p>
   </div>
   <h1>Let’s see your parallel universe!</h1>
 </section>
@@ -24,6 +26,9 @@
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 8em;
   }
   div.designers {
     width: 40%

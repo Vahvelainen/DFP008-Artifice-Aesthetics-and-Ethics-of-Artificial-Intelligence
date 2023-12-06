@@ -38,7 +38,9 @@
         {/if}
       {/each}
     </div>
-    <img class="input" src={data?.input} alt="Your building">
+    <div class="input">
+      <img class="input" src={data?.input} alt="Your building">
+    </div>
     <div class="description">
       <p>{paseBuildDescription()}</p>
     </div>
@@ -49,6 +51,8 @@
   section {
     display: flex;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
     margin-bottom: 8em;
   }
   h2 {
@@ -74,8 +78,14 @@
     aspect-ratio: 1/1;
     border-radius: 9999px;
   }
-  img.input{
+  div.input{
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  img.input {
+    width: 100%;
     border-radius: 10px;
   }
   div.description {

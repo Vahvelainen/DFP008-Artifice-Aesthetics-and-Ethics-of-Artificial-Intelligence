@@ -1,9 +1,7 @@
 
-
 <script>
   export let data
 </script>
-
 
 {#if data}
   <section class="result">
@@ -21,6 +19,8 @@
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 6em;
+    max-width: 1200px;
+    margin: auto;
   }
   h2 {
     width: 100%;
@@ -28,13 +28,17 @@
   }
   div.story {
     width: 60%;
-    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   img.output {
     width: 40%;
     border-radius: 10px;
+    filter: drop-shadow(2em 2em 0px #391484);
   }
   p {
-    max-width: 300px;
+    max-width: 400px;
   }
 </style>

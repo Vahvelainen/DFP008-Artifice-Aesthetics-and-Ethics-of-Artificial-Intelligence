@@ -4,6 +4,7 @@
    * Error handling
   */
  
+  import Topic from "./Topic.svelte";
   import ImageSide from "./ImageSide.svelte";
   import PromtMenu from "./PromtMenu.svelte";
   import History from "./History.svelte";
@@ -13,7 +14,7 @@
   import {saveGeneration} from "./scripts/firestore"
 
   let showHistory = false
-  let topic = 'Household Appliance'
+  let topic = undefined
   let selections = []
   let promt 
   
@@ -70,27 +71,32 @@
 </script>
 
 <section class="image-generation">
-  <!-- These might be should be stylised here for the widths to make them work -->
-  <PromtMenu topic={topic} bind:selections />
-  <ImageSide
-    bind:canvas
-    bind:inputting
-    on:generate={startGenerate} 
-    on:history={ () => showHistory = true }
-    on:complete={ saveAndProceed }
-  />
-  <History 
-    bind:show={showHistory}
-    bind:inputting
-    bind:selections
-    bind:inputBlob
-    bind:outputBlob
-  />
+  {#if !topic}
+    <Topic bind:topic />
+  {:else}
+    <!-- These might be should be stylised here for the widths to make them work -->
+    <PromtMenu topic={topic} bind:selections />
+    <ImageSide
+      bind:canvas
+      bind:inputting
+      on:generate={startGenerate} 
+      on:history={ () => showHistory = true }
+      on:complete={ saveAndProceed }
+    />
+    <History 
+      bind:show={showHistory}
+      bind:inputting
+      bind:selections
+      bind:inputBlob
+      bind:outputBlob
+    />
+  {/if}
 </section>
 
 <style>
   .image-generation {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     background:
       linear-gradient(0deg, rgba(57, 20, 132, 0.5), rgba(57, 20, 132, 0.5)),

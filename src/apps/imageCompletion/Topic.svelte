@@ -7,23 +7,23 @@
   let selected = undefined
 
   const topics = [
-      {
-        name: 'Transportation',
-        img: 'https://i.pinimg.com/564x/d0/92/c2/d092c2e0473bca9180c523887d8722ef.jpg',
-      },
-      {
-        name: 'Household appliance',
-        img: 'https://i.pinimg.com/564x/f1/c8/63/f1c863cbf93fcaa82825e3a699f51344.jpg',
-      },
-      {
-        name: 'Electronic Products',
-        img: 'https://i.pinimg.com/564x/1c/3e/a5/1c3ea5b14e57483c6cd42dc1b3866607.jpg',
-      },
-      {
-        name: 'Furniture & Interior Design',
-        img: 'https://i.pinimg.com/564x/f6/56/4e/f6564e1921fd3433e1f44e7f90a5fd1e.jpg',
-      },
-    ]
+    {
+      name: 'Ship',
+      img: 'https://i.pinimg.com/564x/d5/19/a9/d519a989acd20d092ace40d2358cd726.jpg',
+    },
+    {
+      name: 'Coffee machine',
+      img: 'https://i.pinimg.com/474x/ab/e1/cf/abe1cfdeb6d77d7401340cb129fe0b3b.jpg',
+    },
+    {
+      name: 'Speaker',
+      img: 'https://i.pinimg.com/564x/3d/2a/3d/3d2a3d69e74326feb013cf4b86f2acbc.jpg',
+    },
+    {
+      name: 'Sofa',
+      img: 'https://i.pinimg.com/564x/7e/d4/34/7ed4343b271f1e16767c5476f346bced.jpg',
+    },
+  ]
 
   function select(topic) {
     if (selected === topic) {

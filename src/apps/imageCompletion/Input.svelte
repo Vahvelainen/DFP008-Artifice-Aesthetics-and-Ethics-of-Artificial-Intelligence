@@ -72,8 +72,8 @@
   function stopVideo() {
     onVideo = false
     video.pause()
-    video.src = "";
     video.srcObject.getTracks()[0].stop()
+    video.srcObject = null;
   }
 
   function drawFrame() {

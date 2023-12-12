@@ -60,6 +60,7 @@ async function img2imgAPI( promt, negative_promt, image ) {
     sampler: "K_DPM_2_ANCESTRAL",
     samples: 1,
     steps: 20,
+    seed: 10,
   }
 
   //SabilityAI wants data as formdata

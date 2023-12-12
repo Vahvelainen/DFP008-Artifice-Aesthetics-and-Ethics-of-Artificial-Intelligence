@@ -21,7 +21,7 @@
     width: 100%;
     aspect-ratio: 640/512;
     border-radius: 10px;
-    border: 2px solid #00DEC6;
+    /* border: 2px solid #00DEC6; */
     overflow: hidden;
     margin-bottom: 1em;
   }

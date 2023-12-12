@@ -24,7 +24,8 @@
 <div class="parent">
   {#if inputting}
     <Input bind:canvas/>
-    <WideButton on:click={ () => dispatch('generate') } >Check The Outcome</WideButton>
+    <WideButton on:click={ () => dispatch('generate') } >Ready to see works in parallel universe!</WideButton>
+    <p>Remember to keep your hands away from the camera vision</p>
   {:else}
     <!-- History button -->
     {#if $historyStore.generations.length > 1 }

@@ -15,8 +15,8 @@
 
 <style>
   button {
-    background-color: #3D00BB;
-    color: white;
+    background-color: #FFDDA9;
+    color: black !important;
     font-size: 14px;
     height: 4em;
     position: relative;

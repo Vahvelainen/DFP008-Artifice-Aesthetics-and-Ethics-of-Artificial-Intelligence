@@ -7,6 +7,7 @@
 
   import WideButton from "@lib/WideButton.svelte"
   import Frame from '@lib/Frame.svelte'
+  import { fade } from 'svelte/transition'
 
 
   export let inputting
@@ -47,7 +48,7 @@
 </script>
 
 {#if show}
-  <div class="modal">
+  <div class="modal" transition:fade >
     <div class="history">
       <h2>History selection</h2>
       <div class="carousel">

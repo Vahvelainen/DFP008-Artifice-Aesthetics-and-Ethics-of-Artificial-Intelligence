@@ -37,6 +37,9 @@
       // ctx.scale(-1, 1);
       video.play();
     });
+
+    startVideo()
+
   })
 
   const setImage = (e) => {
@@ -113,10 +116,13 @@
 
 </script>
 <Frame>
-  <div class="button-floater">
-    <IconButton on:click={ () => startVideo() }>photo_camera</IconButton>
-    <IconButton file secondary on:change={ setImage }>file_upload</IconButton>
-  </div>
+  {#if import.meta.env.DEV } 
+    <!-- Image upload only available in dev -->
+    <div class="button-floater">
+      <IconButton on:click={ () => startVideo() }>photo_camera</IconButton>
+      <IconButton file secondary on:change={ setImage }>file_upload</IconButton>
+    </div>
+  {/if}
   <canvas id="input_canvas"></canvas>
 </Frame>
 

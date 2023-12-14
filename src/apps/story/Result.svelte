@@ -5,7 +5,7 @@
 
 {#if data}
   <section class="result">
-    <h2>Your design concept</h2>
+    <h2>In parallel universe...</h2>
     <div class="story">
       <p>In the parallel universe, at the same moment, another you as a designer, design a product like this.</p>
       <p>This product has received rave reviews and far exceeds the average products on the market today. You have become one of the most famous designers in the world.</p>

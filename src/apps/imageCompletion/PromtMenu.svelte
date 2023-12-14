@@ -3,6 +3,7 @@
   import ChoosePromtOption from "./ChoosePromtOption.svelte";
   import PromtBubble from "./PromtBubble.svelte";
   import promtchoises from "./promtchoises";
+  import imageStore from './scripts/imageStore'
 
   // Though of naming this to BubbleMenu if is going to be more general element but lest start from the intented use
   // Name will be from the earlier selections somehow, possibly url param.
@@ -10,6 +11,12 @@
 
   let selecting = undefined
   export let selections = Array(promtchoises.length).fill(undefined)
+
+  function openSelection(choice) {
+    if (!$imageStore.loading) {
+      selecting = choice
+    }
+  }
 
   function makeSelection(e) {
     selections[ promtchoises.findIndex( e => e === selecting) ] = {
@@ -42,7 +49,7 @@
           name={choice.name}
           selection = {selections[i]}
           angle = { 55 * i + 45 }
-          on:click={ () => selecting = choice }
+          on:click={ () => openSelection(choice) }
         />      
       {/each}
     </div>

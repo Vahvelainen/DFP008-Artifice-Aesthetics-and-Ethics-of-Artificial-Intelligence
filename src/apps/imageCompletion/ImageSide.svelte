@@ -31,7 +31,7 @@
     {#if $historyStore.generations.length > 1 }
       <div class="historyBtnFloater">
         <button class="historyBtn" on:click={ () => dispatch('history') } >
-          <h3>History</h3>
+          <p>History</p>
         </button>
       </div>
     {/if}
@@ -43,9 +43,10 @@
       <div class="loading-spinner"></div>
     {:else}
       <div class="two-buttons">
-        <WideButton on:click={ () => inputting = true } >Retry</WideButton>
-        <WideButton on:click={ handleCompleteClick } loading={saving} >I am happy</WideButton>
+        <WideButton on:click={ () => inputting = true } >New picture</WideButton>
+        <WideButton on:click={ handleCompleteClick } loading={saving} >I like this</WideButton>
       </div>
+      <p>Feel free to change the selections or continue building</p>
     {/if}
   {/if}
 </div>

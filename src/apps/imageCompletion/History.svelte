@@ -50,7 +50,7 @@
 {#if show}
   <div class="modal" transition:fade >
     <div class="history">
-      <h2>History selection</h2>
+      <h2>In other universe you designed this...</h2>
       <div class="carousel">
         {#each $historyStore.generations as item, id }
           <button class="card { selectedItem == item ? 'selected' : ''}" on:click={ () => selectItem(item) } >
@@ -62,7 +62,7 @@
           </button>
         {/each}
       </div>
-      <WideButton on:click={confirmSelection} >Select</WideButton>
+      <WideButton on:click={confirmSelection} >Go back to this</WideButton>
     </div>
   </div>
 {/if}

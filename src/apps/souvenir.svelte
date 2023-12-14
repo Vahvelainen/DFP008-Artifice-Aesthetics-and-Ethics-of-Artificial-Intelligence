@@ -75,4 +75,7 @@
   img {
     width: 100%;
   }
+  span {
+    margin-right: 1em;
+  }
 </style>

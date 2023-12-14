@@ -4,8 +4,10 @@
   import { doc, getDoc } from "firebase/firestore"
   import Frame from '@lib/Frame.svelte'
   
-  let creationImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg'
-  let description = 'This is a placeholder'
+  let loaded = false
+  let creationImageUrl = ""
+  let description = ""
+  let selections = []
 
   onMount( () => {
     const queryString = window.location.search;
@@ -25,6 +27,9 @@
       console.log("Document data:", docData)
       creationImageUrl = docData.output
       description = docData.topic
+      selections = JSON.parse(docData.selections)
+      console.log(selections)
+      loaded = true
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!")
@@ -37,17 +42,35 @@
     Remember what you created?
   </h1>
   
-  <Frame>
-    <img src={creationImageUrl} alt={description}>
-  </Frame>
-  
-  <h2>{description}</h2>
+  <div>
+    {#if loaded}
+      <Frame>
+        <img src={creationImageUrl} alt={description}>
+      </Frame>
+      
+      <h2>{description}</h2>
+      {#each selections as selection}
+        {#if selection}
+          <span>{ selection.id + ': ' + selection.name }</span>
+        {/if}
+      {/each}
+    {/if}
+  </div>
 </section>
 
 <style>
   section {
-    max-width: 600px;
-    margin: auto;
+    width: 100%;
+    height: 100vh;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E4E0ED;
+    color: #391484;
+  }
+  div {
+    max-width: 400px;
   }
   img {
     width: 100%;

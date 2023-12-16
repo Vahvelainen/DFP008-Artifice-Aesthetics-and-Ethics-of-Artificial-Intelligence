@@ -13,8 +13,8 @@ async function getHistory() {
   const ref = collection(db, "generations_v2")
   const q = query(ref, orderBy("created", "desc"), limit(50));
   
-  let generations_temp = []
   unsubscribe = onSnapshot(q, (querySnapshot) => {
+    let generations_temp = []
     querySnapshot.forEach((doc) => {
       generations_temp.push({
         id: doc.id,
@@ -23,7 +23,7 @@ async function getHistory() {
     });
     console.log(generations_temp)
     generations = generations_temp
-});
+  });
 }
 
 onMount(getHistory) 

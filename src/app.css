@@ -10,9 +10,9 @@ body {
   margin: 0;
 }
 
-button, label {
-  /* Label only for file upload atm */
+button {
   cursor: pointer;
+  color: black;
 }
 
 .material-icon {

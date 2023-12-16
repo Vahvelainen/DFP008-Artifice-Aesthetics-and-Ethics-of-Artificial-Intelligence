@@ -3,39 +3,36 @@
 <script>
 
 import { db } from "@src/firebase"
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore"; 
-    import { onMount } from "svelte";
+import { collection, getDocs, query, orderBy, limit, onSnapshot } from "firebase/firestore"; 
+import { onDestroy, onMount } from "svelte";
 
 let generations = []
+let unsubscribe = ()=>{}
 
 async function getHistory() {
   const ref = collection(db, "generations_v2")
   const q = query(ref, orderBy("created", "desc"), limit(50));
-
-  let generations = []
-
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    // console.log(doc.id, " => ", doc.data());
-    generations.push({
-      id: doc.id,
-      ...doc.data()
-    })
-  });
-
-  return generations
+  
+  let generations_temp = []
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      generations_temp.push({
+        id: doc.id,
+        ...doc.data()
+      })
+    });
+    console.log(generations_temp)
+    generations = generations_temp
+});
 }
 
-onMount( async () => {
-  generations = await getHistory()
-  console.log(generations)
-}) 
+onMount(getHistory) 
+onDestroy(unsubscribe)
 
 </script>
 
 <section>
-  {#each generations as generation}
+  {#each generations as generation (generation.id) }
     <img src="{generation.output}" alt="previous cretion of somethng">
   {/each}
 </section>
